@@ -2,15 +2,18 @@ package com.damgs.insight;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.View;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactsPage extends AppCompatActivity {
+    private List<Contact> contacts;
+    private RecyclerView recyclerview;
+    private ContactAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,14 +22,26 @@ public class ContactsPage extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        init();
+        setData();
+
     }
 
+    private void setData() {
+        contacts.add(new Contact("Allison","4253949946",R.drawable.ic_baseline_android_24));
+        contacts.add(new Contact("Duaa","4253949946",R.drawable.ic_baseline_android_24));
+        contacts.add(new Contact("Mitch","4253949946",R.drawable.ic_baseline_android_24));
+        contacts.add(new Contact("Det","4253949946",R.drawable.ic_baseline_android_24));
+        contacts.add(new Contact("Sherveen","4253949946",R.drawable.ic_baseline_android_24));
+        contacts.add(new Contact("Nour","4253949946",R.drawable.ic_baseline_android_24));
+        adapter.notifyDataSetChanged();
+    }
+
+    private void init(){
+        contacts = new ArrayList<>();
+        recyclerview = findViewById(R.id.contactRecycleView);
+        recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ContactAdapter(contacts);
+        recyclerview.setAdapter(adapter);
+    }
 }
