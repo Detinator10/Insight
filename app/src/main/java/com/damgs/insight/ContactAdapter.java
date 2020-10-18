@@ -28,15 +28,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Viewhold
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
-        Contact contact = contacts.get(position);
-        holder.nameTv.setText(contact.getName());
-        holder.nameTv2.setText(contact.getPhoneNo());
-        holder.photoIv.setImageResource(contact.getPhoto());
+
     }
 
     @Override
     public int getItemCount() {
-
         return contacts.size();
     }
 

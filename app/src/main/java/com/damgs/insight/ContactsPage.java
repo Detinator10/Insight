@@ -1,13 +1,17 @@
 package com.damgs.insight;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactsPage extends AppCompatActivity {
@@ -15,33 +19,38 @@ public class ContactsPage extends AppCompatActivity {
     private RecyclerView recyclerview;
     private ContactAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacts_page);
+        setContentView(R.layout.content_contacts_page);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        init();
         setData();
 
     }
 
     private void setData() {
-        contacts.add(new Contact("Allison","4253949946",R.drawable.ic_baseline_android_24));
-        contacts.add(new Contact("Duaa","4253949946",R.drawable.ic_baseline_android_24));
+        loadContact((LinearLayout) (findViewById(R.id.parentlist)),"Allison","4253949946",R.drawable.ic_baseline_android_24);
+        loadContact((LinearLayout) (findViewById(R.id.parentlist)),"Duaa","4253949946",R.drawable.ic_baseline_android_24);
+        Log.i("alksdsakdsad","alskdlaskda");
+        /*contacts.add(new Contact("Duaa","4253949946",R.drawable.ic_baseline_android_24));
         contacts.add(new Contact("Mitch","4253949946",R.drawable.ic_baseline_android_24));
         contacts.add(new Contact("Det","4253949946",R.drawable.ic_baseline_android_24));
         contacts.add(new Contact("Sherveen","4253949946",R.drawable.ic_baseline_android_24));
-        contacts.add(new Contact("Nour","4253949946",R.drawable.ic_baseline_android_24));
-        adapter.notifyDataSetChanged();
+        contacts.add(new Contact("Nour","4253949946",R.drawable.ic_baseline_android_24));*/
     }
 
-    private void init(){
-        contacts = new ArrayList<>();
-        recyclerview = findViewById(R.id.contactRecycleView);
-        recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ContactAdapter(contacts);
-        recyclerview.setAdapter(adapter);
+    public void loadContact(LinearLayout parent, String name, String phoneNo, int photo){
+        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+        View custom = inflater.inflate(R.layout.contactitem, null);
+        ImageView photoIV =  (ImageView)(custom.findViewById(R.id.photoIV));
+        photoIV.setImageResource(photo);
+        TextView callIV = (TextView)(custom.findViewById(R.id.nameTV));
+        callIV.setText(name);
+        TextView nameTV = (TextView)(custom.findViewById(R.id.nameTV2));
+        nameTV.setText(phoneNo);
+        parent.addView(custom);
     }
 }
