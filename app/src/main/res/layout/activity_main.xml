@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:width="50dp"
         android:height="50dp"
-        android:src="@drawable/new_logo"
+        android:src="@drawable/image0"
         app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
